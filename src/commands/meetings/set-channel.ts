@@ -45,7 +45,7 @@ export const meetingsSetChannelCommand: CommandDefinition = {
     ],
   },
   handler: async (input, client) => {
-    const transcriptIds = input.ids.split(',').map((id: string) => id.trim());
+    const transcriptIds = z.string().parse(input.ids).split(',').map((id: string) => id.trim());
     if (transcriptIds.length > 5) {
       throw new Error('Maximum 5 transcript IDs allowed per request');
     }

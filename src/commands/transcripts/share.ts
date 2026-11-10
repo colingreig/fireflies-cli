@@ -50,7 +50,7 @@ export const transcriptsShareCommand: CommandDefinition = {
     ],
   },
   handler: async (input, client) => {
-    const emails = input.emails.split(',').map((e: string) => e.trim());
+    const emails = z.string().parse(input.emails).split(',').map((e: string) => e.trim());
     const inputArg: Record<string, unknown> = { meeting_id: input.id, emails };
     if (input.expiry_days !== undefined) inputArg['expiry_days'] = input.expiry_days;
 
